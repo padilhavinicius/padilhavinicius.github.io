@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, Moon, Sun, Sparkles, Terminal, Layers3, Braces, MoveUpRight } from 'lucide-react'
 import { content, links } from './content'
+import { Styleguide } from './Styleguide'
 import './styles.css'
 
 const sections = ['home', 'stack', 'about', 'experience', 'work', 'contact']
 
 function App() {
+  const isStyleguide = window.location.pathname.replace(/\/+$/, '') === '/styleguide'
   const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'pt')
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark')
   const t = content[language]
@@ -16,19 +18,28 @@ function App() {
     document.documentElement.dataset.theme = theme
     document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#090b13' : '#f5f7fb'
     document.querySelector('meta[name="description"]').content = t.heroDescription
+    document.title = isStyleguide
+      ? `${language === 'pt' ? 'Guia de estilo' : 'Style guide'} — Vinícius Padilha`
+      : 'Vinícius Padilha — Senior Frontend Developer'
+    document.querySelector('link[rel="canonical"]').href = isStyleguide
+      ? 'https://padilhavinicius.github.io/styleguide/'
+      : 'https://padilhavinicius.github.io/'
+    if (isStyleguide) document.querySelector('meta[name="description"]').content = language === 'pt'
+      ? 'Guia de estilo do portfólio de Vinícius Padilha: cores, tipografia, componentes, padrões e ícones.'
+      : 'Vinícius Padilha portfolio style guide: colors, typography, components, patterns and icons.'
     localStorage.setItem('portfolio-language', language)
     localStorage.setItem('portfolio-theme', theme)
-  }, [language, theme, t.heroDescription])
+  }, [language, theme, t.heroDescription, isStyleguide])
 
   return (
     <div className="site-shell overflow-hidden">
       <a className="skip-link" href="#main">{language === 'pt' ? 'Ir para o conteúdo' : 'Skip to content'}</a>
       <header className="site-header">
         <div className="page-width flex min-h-[76px] items-center justify-between gap-4">
-          <a href="#home" className="brand" aria-label="Vinícius Padilha, home">vp<span className="brand-dot">.</span></a>
-          <nav className="hidden items-center gap-7 lg:flex" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+          <a href={isStyleguide ? '/' : '#home'} className="brand" aria-label="Vinícius Padilha, home">vp<span className="brand-dot">.</span></a>
+          {!isStyleguide && <nav className="hidden items-center gap-7 lg:flex" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
             {sections.slice(1).map((id, index) => <a key={id} className="nav-link" href={`#${id}`}>{t.nav[index + 1]}</a>)}
-          </nav>
+          </nav>}
           <div className="flex items-center gap-2">
             <div className="segmented" role="group" aria-label={t.languageLabel}>
               <button type="button" lang="pt-BR" aria-pressed={language === 'pt'} className={language === 'pt' ? 'selected' : ''} onClick={() => setLanguage('pt')}>PT</button>
@@ -39,12 +50,12 @@ function App() {
             </button>
           </div>
         </div>
-        <nav className="mobile-nav page-width lg:hidden" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
+        {!isStyleguide && <nav className="mobile-nav page-width lg:hidden" aria-label={language === 'pt' ? 'Navegação principal' : 'Main navigation'}>
           {sections.slice(1).map((id, index) => <a key={id} href={`#${id}`}>{t.nav[index + 1]}</a>)}
-        </nav>
+        </nav>}
       </header>
 
-      <main id="main">
+      {isStyleguide ? <Styleguide language={language} theme={theme} /> : <main id="main">
         <section id="home" className="hero relative scroll-mt-36">
           <div className="hero-glow" aria-hidden="true" />
           <div className="page-width relative grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:py-36">
@@ -125,9 +136,9 @@ function App() {
           <div className="page-width relative z-10"><p className="eyebrow">{t.contactKicker}</p><h2 className="mt-6 max-w-3xl font-display text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[1.12] tracking-[-.055em] text-main">{t.contactTitle}</h2><p className="mt-6 max-w-xl text-lg leading-8 text-muted">{t.contactText}</p><div className="mt-10 flex flex-wrap gap-3"><a className="button-primary" href={links.email}>{t.contactPrimary}<Mail size={18} /></a><a className="button-secondary" href={links.linkedin} target="_blank" rel="noopener noreferrer">{t.contactSecondary}<ArrowUpRight size={18} /></a></div></div>
           <div className="contact-orb" aria-hidden="true" />
         </section>
-      </main>
+      </main>}
 
-      <footer className="footer"><div className="page-width flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm text-muted">© {new Date().getFullYear()} Vinícius Padilha. {t.footer}</p><div className="flex items-center gap-5"><a href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <ArrowUpRight size={13} /></a><a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn <ArrowUpRight size={13} /></a><a href="#home" aria-label={language === 'pt' ? 'Voltar ao início' : 'Back to top'}>↑ Top</a></div></div></footer>
+      <footer className="footer"><div className="page-width flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm text-muted">© {new Date().getFullYear()} Vinícius Padilha. {t.footer}</p><div className="flex flex-wrap items-center gap-5"><a href="/styleguide">{language === 'pt' ? 'Guia de estilo' : 'Style guide'}</a><a href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <ArrowUpRight size={13} /></a><a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn <ArrowUpRight size={13} /></a><a href={isStyleguide ? '/' : '#home'} aria-label={language === 'pt' ? 'Voltar ao início' : 'Back to top'}>↑ Top</a></div></div></footer>
     </div>
   )
 }
