@@ -26,6 +26,7 @@ button { cursor: pointer; }
 .icon-button:hover { border-color: var(--accent); }
 .mobile-nav { display: flex; gap: 23px; overflow: auto; white-space: nowrap; padding-block: 0 14px; scrollbar-width: none; }
 .mobile-nav::-webkit-scrollbar { display: none; }
+@media (min-width: 1024px) { .mobile-nav { display: none; } }
 .skip-link { position: absolute; top: -100px; left: 16px; z-index: 100; padding: 12px; background: var(--surface); color: var(--main); }
 .skip-link:focus { top: 10px; }
 .hero { min-height: min(800px, 100vh); }
