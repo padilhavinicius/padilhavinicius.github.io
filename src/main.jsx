@@ -58,20 +58,20 @@ function App() {
       {isStyleguide ? <Styleguide language={language} theme={theme} /> : <main id="main">
         <section id="home" className="hero relative scroll-mt-36">
           <div className="hero-glow" aria-hidden="true" />
-          <div className="page-width relative grid items-center gap-12 py-20 sm:py-28 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:py-36">
+          <div className="page-width relative grid items-center gap-12 py-10 sm:py-28 lg:grid-cols-[1.1fr_.9fr] lg:gap-14 lg:py-36">
             <div className="relative z-10">
               <div className="status-badge"><span className="status-pulse" />{t.availability}</div>
               <p className="eyebrow mt-12">{t.eyebrow}</p>
               <h1 className="hero-title mt-5">{t.heroTitle[0]} <span className="gradient-text">{t.heroTitle[1]}</span><br />{t.heroTitle[2]}</h1>
               <p className="hero-description mt-7 max-w-[640px]">{t.heroDescription}</p>
-              <div className="mt-10 flex flex-wrap items-center gap-3">
+              <div className="hero-actions mt-10 flex flex-wrap items-center gap-3">
                 <a className="button-primary" href="#contact">{t.heroPrimary}<ArrowUpRight size={18} /></a>
                 <a className="button-secondary" href="#work">{t.heroSecondary}<ArrowRight size={17} /></a>
               </div>
-              <div className="mt-14 flex items-center gap-5 border-t border-line pt-6">
+              <div className="mt-14 flex items-center gap-3 border-t border-line pt-6 sm:gap-5">
                 <div className="font-display text-4xl font-semibold tracking-tight text-main">10<span className="text-accent">+</span></div>
-                <p className="max-w-36 text-sm leading-5 text-muted">{t.years}</p>
-                <span className="mx-1 h-9 w-px bg-line" />
+                <p className="min-w-0 max-w-36 text-sm leading-5 text-muted">{t.years}</p>
+                <span className="ml-auto mr-1 h-9 w-px shrink-0 bg-line sm:mx-1" />
                 <div className="flex items-center gap-3">
                   <a className="social-link" href={links.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub — ${t.openNew}`}><Github size={19} /></a>
                   <a className="social-link" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn — ${t.openNew}`}><Linkedin size={19} /></a>
