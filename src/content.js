@@ -56,9 +56,9 @@ export const content = {
     workTitle: 'Problemas que gosto de resolver.',
     workIntro: 'Algumas frentes que representam meu trabalho, da estratégia à implementação.',
     work: [
-      { number: '01', title: 'Plataformas de retail media', description: 'Interfaces para fluxos de catálogo, SEO e matching de produtos em múltiplos canais, com IA aplicada ao trabalho diário.', tags: ['Angular', 'IA', 'Design System'] },
+      { number: '01', title: 'Plataforma de retail media', description: 'Interfaces para fluxos de catálogo, SEO e matching de produtos em múltiplos canais, com IA aplicada ao trabalho diário.', tags: ['Angular', 'IA', 'Design System'] },
       { number: '02', title: 'Experiências mobile', description: 'Produtos em React Native e Expo, com atenção à fluidez, integração e consistência entre telas.', tags: ['React Native', 'Expo', 'Mobile'] },
-      { number: '03', title: 'Design System & arquitetura', description: 'Componentes compartilhados, tokens e estruturas de frontend que ajudam equipes a entregar com consistência.', tags: ['React', 'TypeScript', 'Design Systems'] },
+      { number: '03', title: 'Design System & arquitetura', description: 'Componentes compartilhados, tokens e estruturas de frontend que ajudam equipes a entregar com consistência.', tags: ['React', 'TypeScript', 'Testes unitários'] },
     ],
     contactKicker: '05 / CONTATO',
     contactTitle: 'Vamos construir algo novo juntos?',
@@ -120,9 +120,9 @@ export const content = {
     workTitle: 'Problems I like solving.',
     workIntro: 'A few areas that represent my work, from strategy to implementation.',
     work: [
-      { number: '01', title: 'Retail media platforms', description: 'Interfaces for catalog workflows, SEO, and cross-channel product matching, with AI applied to day-to-day development.', tags: ['Angular', 'AI', 'Design System'] },
+      { number: '01', title: 'Retail media platform', description: 'Interfaces for catalog workflows, SEO, and cross-channel product matching, with AI applied to day-to-day development.', tags: ['Angular', 'AI', 'Design System'] },
       { number: '02', title: 'Mobile experiences', description: 'Products built with React Native and Expo, designed for smooth interactions, integration, and consistency.', tags: ['React Native', 'Expo', 'Mobile'] },
-      { number: '03', title: 'Design System & architecture', description: 'Shared components, tokens, and frontend foundations that help teams ship consistently.', tags: ['React', 'TypeScript', 'Design Systems'] },
+      { number: '03', title: 'Design System & architecture', description: 'Shared components, tokens, and frontend foundations that help teams ship consistently.', tags: ['React', 'TypeScript', 'Unit tests'] },
     ],
     contactKicker: '05 / CONTACT',
     contactTitle: "Let's build something new together?",
