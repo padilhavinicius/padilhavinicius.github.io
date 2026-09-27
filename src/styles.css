@@ -73,6 +73,7 @@ button { cursor: pointer; }
 .about-copy { position: relative; padding-top: 18px; }.about-copy p { margin: 0 0 21px; color: var(--muted); font-size: 1.06rem; line-height: 1.85; }.quote-mark { position: absolute; top: -72px; left: -14px; color: var(--accent); font-family: Georgia,serif; font-size: 8rem; line-height: 1; opacity: .12; }
 .value-tag { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--main); background: var(--surface); font-size: .74rem; font-weight: 600; }
 .experience-list { border-top: 1px solid var(--line); }.experience-item { display: grid; grid-template-columns: 55px minmax(0,1fr) auto; gap: 20px; padding: 31px 0 35px; border-bottom: 1px solid var(--line); }
+.experience-item:last-child { border-bottom: 0; }
 .experience-number, .experience-period { color: var(--subtle); font: 11px 'DM Mono',monospace; letter-spacing: .08em; }.experience-number { padding-top: 9px; }.experience-period { padding-top: 9px; white-space: nowrap; }
 .work-card { min-height: 350px; padding: 26px; display: flex; flex-direction: column; justify-content: space-between; gap: 32px; }
 .contact-section { padding: 77px 0 83px; overflow: hidden; background: color-mix(in srgb,var(--surface) 72%,transparent); }.contact-orb { position: absolute; right: -120px; top: -40px; width: 520px; height: 520px; border-radius: 50%; background: radial-gradient(circle,rgba(80,192,190,.15),rgba(116,79,186,.11) 38%,transparent 70%); pointer-events: none; }
