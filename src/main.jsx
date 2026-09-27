@@ -130,7 +130,22 @@ function App() {
 
         <section id="experience" className="section section-soft">
           <div className="page-width"><SectionHeading kicker={t.experienceKicker} title={t.experienceTitle} intro={t.experienceIntro} />
-            <div className="experience-list">{t.jobs.map((job, i) => <article className="experience-item" key={job.company}><span className="experience-number">0{i + 1}</span><div><h3 className="font-display text-2xl font-semibold text-main">{job.company}</h3><p className="mt-1 text-sm font-medium text-accent">{job.role}</p><p className="mt-4 max-w-2xl leading-7 text-muted">{job.detail}</p><div className="mt-5 flex flex-wrap gap-2">{job.tags.map(tag => <span className="tag tag-small" key={tag}>{tag}</span>)}</div></div><span className="experience-period">{job.period}</span></article>)}</div>
+            <div className="experience-list">{t.jobs.map((job, i) => <article className="experience-item" key={job.company}>
+              <span className="experience-number">0{i + 1}</span>
+              <div>
+                <h3 className="font-display text-2xl font-semibold text-main">{job.company}</h3>
+                <p className="mt-1 text-sm font-medium text-accent">{job.role}</p>
+                {job.rolePeriod && <p className="mt-1 text-xs text-subtle">{job.rolePeriod}</p>}
+                <p className="mt-4 max-w-2xl leading-7 text-muted">{job.detail}</p>
+                {job.previousRoles?.map(previous => <div className="mt-5 border-l border-line pl-4" key={previous.role}>
+                  <h4 className="font-display text-base font-semibold text-main">{previous.role}</h4>
+                  <p className="mt-1 text-xs text-subtle">{previous.period}</p>
+                  <p className="mt-3 max-w-2xl leading-7 text-muted">{previous.detail}</p>
+                </div>)}
+                <div className="mt-5 flex flex-wrap gap-2">{job.tags.map(tag => <span className="tag tag-small" key={tag}>{tag}</span>)}</div>
+              </div>
+              <span className="experience-period">{job.period}</span>
+            </article>)}</div>
           </div>
         </section>
 
@@ -141,14 +156,14 @@ function App() {
         </section>
 
         <section id="contact" className="section contact-section">
-          <div className="page-width relative z-10"><p className="eyebrow">{t.contactKicker}</p><h2 className="mt-6 max-w-3xl font-display text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[1.12] tracking-[-.055em] text-main">{t.contactTitle}</h2><p className="mt-6 max-w-xl text-lg leading-8 text-muted">{t.contactText}</p><div className="mt-10 flex flex-wrap gap-3"><a className="button-primary" href={links.email}>{t.contactPrimary}<Mail size={18} /></a><a className="button-secondary" href={links.linkedin} target="_blank" rel="noopener noreferrer">{t.contactSecondary}<ArrowUpRight size={18} /></a></div></div>
+          <div className="page-width relative z-10"><p className="eyebrow">{t.contactKicker}</p><h2 className="mt-6 max-w-3xl font-display text-[clamp(2.7rem,6vw,5rem)] font-semibold leading-[1.12] tracking-[-.055em] text-main">{t.contactTitle}</h2><p className="mt-6 max-w-xl text-lg leading-8 text-muted">{t.contactText}</p><div className="contact-actions mt-10 flex flex-wrap gap-3"><a className="button-primary" href={links.email}>{t.contactPrimary}<Mail size={18} /></a><a className="button-secondary" href={links.linkedin} target="_blank" rel="noopener noreferrer">{t.contactSecondary}<ArrowUpRight size={18} /></a></div></div>
           <div className="contact-orb" aria-hidden="true" />
         </section>
       </main>}
 
       {showBackToTop && <button className="back-to-top" type="button" aria-label={language === 'pt' ? 'Voltar ao topo' : 'Back to top'} title={language === 'pt' ? 'Voltar ao topo' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}><ArrowUp size={21} strokeWidth={2} /></button>}
 
-      <footer className="footer"><div className="page-width flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm text-muted">© {new Date().getFullYear()} Vinícius Padilha. {t.footer}</p><div className="flex flex-wrap items-center gap-5"><a href="/styleguide">{language === 'pt' ? 'Guia de estilo' : 'Style guide'}</a><a href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <ArrowUpRight size={13} /></a><a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn <ArrowUpRight size={13} /></a><a href={isStyleguide ? '/' : '#home'} aria-label={language === 'pt' ? 'Voltar ao início' : 'Back to top'}>↑ Top</a></div></div></footer>
+      <footer className="footer"><div className="page-width flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm text-muted">© {new Date().getFullYear()} Vinícius Padilha.</p><div className="flex flex-wrap items-center gap-5"><a href="/styleguide">{language === 'pt' ? 'Guia de estilo' : 'Style guide'}</a><a href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <ArrowUpRight size={13} /></a><a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn <ArrowUpRight size={13} /></a></div></div></footer>
     </div>
   )
 }
