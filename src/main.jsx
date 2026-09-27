@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { createRoot } from 'react-dom/client'
-import { ArrowDown, ArrowRight, ArrowUpRight, Github, Linkedin, Mail, Moon, Sun, Sparkles, Terminal, Layers3, Braces, MoveUpRight } from 'lucide-react'
+import { ArrowDown, ArrowRight, ArrowUp, ArrowUpRight, Github, Linkedin, Mail, Moon, Sun, Sparkles, Terminal, Layers3, Braces, MoveUpRight } from 'lucide-react'
 import { content, links } from './content'
 import { Styleguide } from './Styleguide'
 import './styles.css'
@@ -11,6 +11,7 @@ function App() {
   const isStyleguide = window.location.pathname.replace(/\/+$/, '') === '/styleguide'
   const [language, setLanguage] = useState(() => localStorage.getItem('portfolio-language') === 'en' ? 'en' : 'pt')
   const [theme, setTheme] = useState(() => localStorage.getItem('portfolio-theme') === 'light' ? 'light' : 'dark')
+  const [showBackToTop, setShowBackToTop] = useState(false)
   const t = content[language]
 
   useEffect(() => {
@@ -31,8 +32,15 @@ function App() {
     localStorage.setItem('portfolio-theme', theme)
   }, [language, theme, t.heroDescription, isStyleguide])
 
+  useEffect(() => {
+    const updateBackToTop = () => setShowBackToTop(window.scrollY > 400)
+    updateBackToTop()
+    window.addEventListener('scroll', updateBackToTop, { passive: true })
+    return () => window.removeEventListener('scroll', updateBackToTop)
+  }, [])
+
   return (
-    <div className="site-shell overflow-hidden">
+    <div className="site-shell">
       <a className="skip-link" href="#main">{language === 'pt' ? 'Ir para o conteúdo' : 'Skip to content'}</a>
       <header className="site-header">
         <div className="page-width flex min-h-[76px] items-center justify-between gap-4">
@@ -68,10 +76,10 @@ function App() {
                 <a className="button-primary" href="#contact">{t.heroPrimary}<ArrowUpRight size={18} /></a>
                 <a className="button-secondary" href="#work">{t.heroSecondary}<ArrowRight size={17} /></a>
               </div>
-              <div className="mt-14 flex items-center gap-3 border-t border-line pt-6 sm:gap-5">
+              <div className="mt-14 flex items-center justify-center gap-3 border-t border-line pt-6 sm:justify-start sm:gap-5">
                 <div className="font-display text-4xl font-semibold tracking-tight text-main">10<span className="text-accent">+</span></div>
                 <p className="min-w-0 max-w-36 text-sm leading-5 text-muted">{t.years}</p>
-                <span className="ml-auto mr-1 h-9 w-px shrink-0 bg-line sm:mx-1" />
+                <span className="mx-1 h-9 w-px shrink-0 bg-line" />
                 <div className="flex items-center gap-3">
                   <a className="social-link" href={links.github} target="_blank" rel="noopener noreferrer" aria-label={`GitHub — ${t.openNew}`}><Github size={19} /></a>
                   <a className="social-link" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`LinkedIn — ${t.openNew}`}><Linkedin size={19} /></a>
@@ -137,6 +145,8 @@ function App() {
           <div className="contact-orb" aria-hidden="true" />
         </section>
       </main>}
+
+      {showBackToTop && <button className="back-to-top" type="button" aria-label={language === 'pt' ? 'Voltar ao topo' : 'Back to top'} title={language === 'pt' ? 'Voltar ao topo' : 'Back to top'} onClick={() => window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' })}><ArrowUp size={21} strokeWidth={2} /></button>}
 
       <footer className="footer"><div className="page-width flex flex-col gap-5 py-9 sm:flex-row sm:items-center sm:justify-between"><p className="text-sm text-muted">© {new Date().getFullYear()} Vinícius Padilha. {t.footer}</p><div className="flex flex-wrap items-center gap-5"><a href="/styleguide">{language === 'pt' ? 'Guia de estilo' : 'Style guide'}</a><a href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">GitHub <ArrowUpRight size={13} /></a><a href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">LinkedIn <ArrowUpRight size={13} /></a><a href={isStyleguide ? '/' : '#home'} aria-label={language === 'pt' ? 'Voltar ao início' : 'Back to top'}>↑ Top</a></div></div></footer>
     </div>
